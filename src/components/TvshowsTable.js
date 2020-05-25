@@ -37,7 +37,10 @@ export default class TvshowsTable extends Component {
         fixed: 'right',
         key: 'x',
         width: 40,
-        render: () => <EditOutlined twoToneColor="#52c41a" />,
+        render: (tvshow) =>
+          this.state.data.length >= 1 ? (
+            <EditOutlined twoToneColor="#52c41a" onClick={() => this.handleUpdate(tvshow)} />
+          ) : null
       },
       {
         dataIndex: '',
@@ -49,7 +52,7 @@ export default class TvshowsTable extends Component {
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(tvshow._id)}>
               <DeleteOutlined twoToneColor="#eb2f96" />
             </Popconfirm>
-          ) : null,
+          ) : null
       }
     ];
 
@@ -70,6 +73,11 @@ export default class TvshowsTable extends Component {
     fetch("http://localhost:3001/tvshows/" + tvshowId, requestOptions)
       .then(response => response.json())
       .then(() => { console.log("tvshow deleted") })
+  }
+
+  handleUpdate(tvshow) {
+    this.props.setEditingTVshow(tvshow)
+    this.props.setIsEditing(!this.props.isEditing)
   }
 
   render() {
