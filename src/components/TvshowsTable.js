@@ -49,10 +49,10 @@ export default class TvshowsTable extends Component {
         width: 40,
         render: (tvshow) =>
           this.state.data.length >= 1 ? (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(tvshow._id)}>
+            <Popconfirm title="¿Quieres eliminar?" onConfirm={() => this.handleDelete(tvshow._id)}>
               <DeleteOutlined twoToneColor="#eb2f96" />
             </Popconfirm>
-          ) : null
+          ) : null,
       }
     ];
 
@@ -79,7 +79,6 @@ export default class TvshowsTable extends Component {
     this.props.setEditingTVshow(tvshow)
     this.props.setIsEditing(!this.props.isEditing)
   }
-
   render() {
     return(
       <div className="component-container">
